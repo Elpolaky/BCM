@@ -3,31 +3,31 @@ BCM.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .text         00000a66  00000000  00000000  00000094  2**1
+  0 .text         00000a46  00000000  00000000  00000094  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  1 .data         0000002c  00800060  00000a66  00000afa  2**0
+  1 .data         0000002c  00800060  00000a46  00000ada  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  2 .bss          00000014  0080008c  0080008c  00000b26  2**0
+  2 .bss          00000014  0080008c  0080008c  00000b06  2**0
                   ALLOC
-  3 .comment      00000030  00000000  00000000  00000b26  2**0
+  3 .comment      00000030  00000000  00000000  00000b06  2**0
                   CONTENTS, READONLY
-  4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000b58  2**2
+  4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000b38  2**2
                   CONTENTS, READONLY
-  5 .debug_aranges 00000308  00000000  00000000  00000b94  2**0
+  5 .debug_aranges 00000308  00000000  00000000  00000b74  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_info   00002b31  00000000  00000000  00000e9c  2**0
+  6 .debug_info   0000296f  00000000  00000000  00000e7c  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 00001122  00000000  00000000  000039cd  2**0
+  7 .debug_abbrev 000010e1  00000000  00000000  000037eb  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   00001a04  00000000  00000000  00004aef  2**0
+  8 .debug_line   000019bc  00000000  00000000  000048cc  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_frame  00000738  00000000  00000000  000064f4  2**2
+  9 .debug_frame  00000738  00000000  00000000  00006288  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    00001386  00000000  00000000  00006c2c  2**0
+ 10 .debug_str    000013a0  00000000  00000000  000069c0  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    00001ea3  00000000  00000000  00007fb2  2**0
+ 11 .debug_loc    00001ea3  00000000  00000000  00007d60  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 00000250  00000000  00000000  00009e55  2**0
+ 12 .debug_ranges 00000250  00000000  00000000  00009c03  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -67,7 +67,7 @@ Disassembly of section .text:
   60:	10 e0       	ldi	r17, 0x00	; 0
   62:	a0 e6       	ldi	r26, 0x60	; 96
   64:	b0 e0       	ldi	r27, 0x00	; 0
-  66:	e6 e6       	ldi	r30, 0x66	; 102
+  66:	e6 e4       	ldi	r30, 0x46	; 70
   68:	fa e0       	ldi	r31, 0x0A	; 10
   6a:	02 c0       	rjmp	.+4      	; 0x70 <__do_copy_data+0x10>
   6c:	05 90       	lpm	r0, Z+
@@ -90,77 +90,52 @@ Disassembly of section .text:
   82:	b2 07       	cpc	r27, r18
   84:	e1 f7       	brne	.-8      	; 0x7e <.do_clear_bss_loop>
   86:	0e 94 90 00 	call	0x120	; 0x120 <main>
-  8a:	0c 94 31 05 	jmp	0xa62	; 0xa62 <_exit>
+  8a:	0c 94 21 05 	jmp	0xa42	; 0xa42 <_exit>
 
 0000008e <__bad_interrupt>:
   8e:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
 
 00000092 <app_Init>:
-************************************************************************************************************************/
-
-
-	
-void app_Init(void){
-	sei();
   92:	78 94       	sei
-	bcm_init(&str_bcm_init_t);
   94:	83 e8       	ldi	r24, 0x83	; 131
   96:	90 e0       	ldi	r25, 0x00	; 0
   98:	0e 94 03 04 	call	0x806	; 0x806 <bcm_init>
-	bcm_send_n(&str_bcm_init_t,a, y);
   9c:	40 91 61 00 	lds	r20, 0x0061	; 0x800061 <y>
   a0:	6d e6       	ldi	r22, 0x6D	; 109
   a2:	70 e0       	ldi	r23, 0x00	; 0
   a4:	83 e8       	ldi	r24, 0x83	; 131
   a6:	90 e0       	ldi	r25, 0x00	; 0
   a8:	0e 94 14 04 	call	0x828	; 0x828 <bcm_send_n>
-	bcm_send_n(&str_bcm_init_t,b, x);
   ac:	40 91 62 00 	lds	r20, 0x0062	; 0x800062 <x>
   b0:	64 e6       	ldi	r22, 0x64	; 100
   b2:	70 e0       	ldi	r23, 0x00	; 0
   b4:	83 e8       	ldi	r24, 0x83	; 131
   b6:	90 e0       	ldi	r25, 0x00	; 0
   b8:	0e 94 14 04 	call	0x828	; 0x828 <bcm_send_n>
-	bcm_send_n(&str_bcm_init_t,c, z);
   bc:	40 91 60 00 	lds	r20, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
   c0:	63 e6       	ldi	r22, 0x63	; 99
   c2:	70 e0       	ldi	r23, 0x00	; 0
   c4:	83 e8       	ldi	r24, 0x83	; 131
   c6:	90 e0       	ldi	r25, 0x00	; 0
   c8:	0e 94 14 04 	call	0x828	; 0x828 <bcm_send_n>
-	LED_INIT(pina0 );
   cc:	80 e0       	ldi	r24, 0x00	; 0
   ce:	0e 94 7e 00 	call	0xfc	; 0xfc <LED_INIT>
-	LED_INIT(pina1 );
   d2:	81 e0       	ldi	r24, 0x01	; 1
   d4:	0e 94 7e 00 	call	0xfc	; 0xfc <LED_INIT>
   d8:	08 95       	ret
 
 000000da <app_Start>:
-
-}
-	
-void app_Start(void){
-	
-	 uint8_t u8_dispatcher_status =   bcm_disbatcher(&str_bcm_init_t,SENDING_FIRST);
   da:	61 e0       	ldi	r22, 0x01	; 1
   dc:	83 e8       	ldi	r24, 0x83	; 131
   de:	90 e0       	ldi	r25, 0x00	; 0
   e0:	0e 94 72 04 	call	0x8e4	; 0x8e4 <bcm_disbatcher>
-	  if (u8_dispatcher_status == BUFFER_SENT_OK)
   e4:	8a 30       	cpi	r24, 0x0A	; 10
   e6:	21 f4       	brne	.+8      	; 0xf0 <app_Start+0x16>
-	  {
-		 LED_ON(pina0);
   e8:	80 e0       	ldi	r24, 0x00	; 0
   ea:	0e 94 87 00 	call	0x10e	; 0x10e <LED_ON>
   ee:	08 95       	ret
-	  }
-	  else if (u8_dispatcher_status == BUFFER_RECEIVED_OK)
   f0:	8b 30       	cpi	r24, 0x0B	; 11
   f2:	19 f4       	brne	.+6      	; 0xfa <app_Start+0x20>
-	  {
-		 LED_ON(pina1);
   f4:	81 e0       	ldi	r24, 0x01	; 1
   f6:	0e 94 87 00 	call	0x10e	; 0x10e <LED_ON>
   fa:	08 95       	ret
@@ -186,17 +161,7 @@ void app_Start(void){
  11e:	08 95       	ret
 
 00000120 <main>:
-#include "APP/APP.h"
-#define F_CPU 8000000UL 
-int main(void)
-{
-	
- app_Init();
  120:	0e 94 49 00 	call	0x92	; 0x92 <app_Init>
-   while (1)
-   {
-	
-		app_Start();
  124:	0e 94 6d 00 	call	0xda	; 0xda <app_Start>
  128:	fd cf       	rjmp	.-6      	; 0x124 <main+0x4>
 
@@ -1134,7 +1099,7 @@ enu_bcm_send_state_t bcm_send_n( str_bcm_instance_t *ptr_bcm_instance_t ,uint8_t
  83a:	51 c0       	rjmp	.+162    	; 0x8de <__stack+0x7f>
 			{
 				if (l_sendState == FIRST_TIME_SENDING && ptr_buffer != NULL)													// check if it is the first use to bcm_send_n
- 83c:	80 91 82 00 	lds	r24, 0x0082	; 0x800082 <l_sendState.1808>
+ 83c:	80 91 82 00 	lds	r24, 0x0082	; 0x800082 <l_sendState.1807>
  840:	87 30       	cpi	r24, 0x07	; 7
  842:	f1 f4       	brne	.+60     	; 0x880 <__stack+0x21>
  844:	61 15       	cp	r22, r1
@@ -1142,7 +1107,7 @@ enu_bcm_send_state_t bcm_send_n( str_bcm_instance_t *ptr_bcm_instance_t ,uint8_t
  848:	d9 f0       	breq	.+54     	; 0x880 <__stack+0x21>
 				{		
 					str_sending_buffer->ptr_data_buffer[l_bufferNum] = ptr_buffer;												// saving buffer pointer in queue
- 84a:	20 91 9d 00 	lds	r18, 0x009D	; 0x80009d <l_bufferNum.1809>
+ 84a:	20 91 9d 00 	lds	r18, 0x009D	; 0x80009d <l_bufferNum.1808>
  84e:	82 2f       	mov	r24, r18
  850:	90 e0       	ldi	r25, 0x00	; 0
  852:	fc 01       	movw	r30, r24
@@ -1164,10 +1129,10 @@ enu_bcm_send_state_t bcm_send_n( str_bcm_instance_t *ptr_bcm_instance_t ,uint8_t
  86e:	80 93 9f 00 	sts	0x009F, r24	; 0x80009f <gl_uart_state>
 					l_bufferNum++;																								// accessing the next pointer to save in it if we use this func again
  872:	2f 5f       	subi	r18, 0xFF	; 255
- 874:	20 93 9d 00 	sts	0x009D, r18	; 0x80009d <l_bufferNum.1809>
+ 874:	20 93 9d 00 	sts	0x009D, r18	; 0x80009d <l_bufferNum.1808>
 					l_sendState = NOT_FIRST_TIME_SENDING ;																		// to enter the NOT_FIRST_TIME_SENDING state
  878:	88 e0       	ldi	r24, 0x08	; 8
- 87a:	80 93 82 00 	sts	0x0082, r24	; 0x800082 <l_sendState.1808>
+ 87a:	80 93 82 00 	sts	0x0082, r24	; 0x800082 <l_sendState.1807>
  87e:	2f c0       	rjmp	.+94     	; 0x8de <__stack+0x7f>
 					
 				} 
@@ -1179,7 +1144,7 @@ enu_bcm_send_state_t bcm_send_n( str_bcm_instance_t *ptr_bcm_instance_t ,uint8_t
  888:	d1 f0       	breq	.+52     	; 0x8be <__stack+0x5f>
 				{
 					str_sending_buffer->ptr_data_buffer[l_bufferNum]= ptr_buffer;												// saving buffer pointer in queue
- 88a:	e0 91 9d 00 	lds	r30, 0x009D	; 0x80009d <l_bufferNum.1809>
+ 88a:	e0 91 9d 00 	lds	r30, 0x009D	; 0x80009d <l_bufferNum.1808>
  88e:	8e 2f       	mov	r24, r30
  890:	90 e0       	ldi	r25, 0x00	; 0
  892:	dc 01       	movw	r26, r24
@@ -1198,7 +1163,7 @@ enu_bcm_send_state_t bcm_send_n( str_bcm_instance_t *ptr_bcm_instance_t ,uint8_t
  8aa:	5c 93       	st	X, r21
 					l_bufferNum++;																								// accessing the next pointer to save in it if we use this func again
  8ac:	ef 5f       	subi	r30, 0xFF	; 255
- 8ae:	e0 93 9d 00 	sts	0x009D, r30	; 0x80009d <l_bufferNum.1809>
+ 8ae:	e0 93 9d 00 	sts	0x009D, r30	; 0x80009d <l_bufferNum.1808>
 					str_sending_buffer->ptr_data_buffer[l_bufferNum]=NULL;
  8b2:	f0 e0       	ldi	r31, 0x00	; 0
  8b4:	ee 0f       	add	r30, r30
@@ -1212,7 +1177,7 @@ enu_bcm_send_state_t bcm_send_n( str_bcm_instance_t *ptr_bcm_instance_t ,uint8_t
  8c0:	71 f4       	brne	.+28     	; 0x8de <__stack+0x7f>
 				{
 					str_sending_buffer->ptr_data_buffer[l_bufferNum]=NULL;
- 8c2:	e0 91 9d 00 	lds	r30, 0x009D	; 0x80009d <l_bufferNum.1809>
+ 8c2:	e0 91 9d 00 	lds	r30, 0x009D	; 0x80009d <l_bufferNum.1808>
  8c6:	f0 e0       	ldi	r31, 0x00	; 0
  8c8:	ee 0f       	add	r30, r30
  8ca:	ff 1f       	adc	r31, r31
@@ -1220,7 +1185,7 @@ enu_bcm_send_state_t bcm_send_n( str_bcm_instance_t *ptr_bcm_instance_t ,uint8_t
  8ce:	10 82       	st	Z, r1
 					l_sendState = SEND_FAILD_NULL_PTR;
  8d0:	89 e0       	ldi	r24, 0x09	; 9
- 8d2:	80 93 82 00 	sts	0x0082, r24	; 0x800082 <l_sendState.1808>
+ 8d2:	80 93 82 00 	sts	0x0082, r24	; 0x800082 <l_sendState.1807>
  8d6:	03 c0       	rjmp	.+6      	; 0x8de <__stack+0x7f>
 				}	
 			}
@@ -1229,14 +1194,14 @@ enu_bcm_send_state_t bcm_send_n( str_bcm_instance_t *ptr_bcm_instance_t ,uint8_t
 		{	
 			l_sendState = BCM_FAILD;
  8d8:	82 e0       	ldi	r24, 0x02	; 2
- 8da:	80 93 82 00 	sts	0x0082, r24	; 0x800082 <l_sendState.1808>
+ 8da:	80 93 82 00 	sts	0x0082, r24	; 0x800082 <l_sendState.1807>
 		
 		return l_sendState;
 	
 	
 	
 }
- 8de:	80 91 82 00 	lds	r24, 0x0082	; 0x800082 <l_sendState.1808>
+ 8de:	80 91 82 00 	lds	r24, 0x0082	; 0x800082 <l_sendState.1807>
  8e2:	08 95       	ret
 
 000008e4 <bcm_disbatcher>:
@@ -1249,7 +1214,7 @@ enu_bcm_send_state_t bcm_disbatcher(str_bcm_instance_t *ptr_bcm_instance_t ,enu_
  8e8:	dc 01       	movw	r26, r24
 	static enu_bcm_first_use l_first_use ;
 	if(l_first_use != 0)																									// used to convert the state of the dispatcher between sending and receiving
- 8ea:	80 91 9c 00 	lds	r24, 0x009C	; 0x80009c <l_first_use.1814>
+ 8ea:	80 91 9c 00 	lds	r24, 0x009C	; 0x80009c <l_first_use.1813>
  8ee:	81 11       	cpse	r24, r1
  8f0:	02 c0       	rjmp	.+4      	; 0x8f6 <bcm_disbatcher+0x12>
 	{
@@ -1258,14 +1223,14 @@ enu_bcm_send_state_t bcm_disbatcher(str_bcm_instance_t *ptr_bcm_instance_t ,enu_
 	else
 	{
 		l_first_use =a_first_use;
- 8f2:	60 93 9c 00 	sts	0x009C, r22	; 0x80009c <l_first_use.1814>
+ 8f2:	60 93 9c 00 	sts	0x009C, r22	; 0x80009c <l_first_use.1813>
 	}
 	static uint8_t l_buffer_Num									= FIRST_BUFFER ;
 	static uint8_t l_buffer_element								= FIRST_ELEMENT;
 	static uint8_t l_rx_buffer_element							= FIRST_ELEMENT;
 	static enu_bcm_send_state_t dispatcher_state				= IDLE ;
 	 uint16 l_buffer_size										=str_sending_buffer->u8_dataSize[l_buffer_Num];
- 8f6:	90 91 9b 00 	lds	r25, 0x009B	; 0x80009b <l_buffer_Num.1815>
+ 8f6:	90 91 9b 00 	lds	r25, 0x009B	; 0x80009b <l_buffer_Num.1814>
  8fa:	29 2f       	mov	r18, r25
  8fc:	30 e0       	ldi	r19, 0x00	; 0
  8fe:	f9 01       	movw	r30, r18
@@ -1285,7 +1250,7 @@ enu_bcm_send_state_t bcm_disbatcher(str_bcm_instance_t *ptr_bcm_instance_t ,enu_
  916:	88 c0       	rjmp	.+272    	; 0xa28 <bcm_disbatcher+0x144>
 	{
 		if( l_first_use == SENDING_FIRST)																					// if app select to send first or we activities sending after receiving
- 918:	80 91 9c 00 	lds	r24, 0x009C	; 0x80009c <l_first_use.1814>
+ 918:	80 91 9c 00 	lds	r24, 0x009C	; 0x80009c <l_first_use.1813>
  91c:	81 30       	cpi	r24, 0x01	; 1
  91e:	09 f0       	breq	.+2      	; 0x922 <bcm_disbatcher+0x3e>
  920:	47 c0       	rjmp	.+142    	; 0x9b0 <bcm_disbatcher+0xcc>
@@ -1297,7 +1262,7 @@ enu_bcm_send_state_t bcm_disbatcher(str_bcm_instance_t *ptr_bcm_instance_t ,enu_
  92a:	7e c0       	rjmp	.+252    	; 0xa28 <bcm_disbatcher+0x144>
 			{							
 				if(l_buffer_element < l_buffer_size )																		// checking if we not send all buffer yet
- 92c:	40 91 9a 00 	lds	r20, 0x009A	; 0x80009a <l_buffer_element.1816>
+ 92c:	40 91 9a 00 	lds	r20, 0x009A	; 0x80009a <l_buffer_element.1815>
  930:	50 e0       	ldi	r21, 0x00	; 0
  932:	46 17       	cp	r20, r22
  934:	57 07       	cpc	r21, r23
@@ -1321,12 +1286,12 @@ enu_bcm_send_state_t bcm_disbatcher(str_bcm_instance_t *ptr_bcm_instance_t ,enu_
  954:	95 e0       	ldi	r25, 0x05	; 5
  956:	0e 94 f7 03 	call	0x7ee	; 0x7ee <uart_TX_SetCallBack>
 					l_buffer_element++;
- 95a:	80 91 9a 00 	lds	r24, 0x009A	; 0x80009a <l_buffer_element.1816>
+ 95a:	80 91 9a 00 	lds	r24, 0x009A	; 0x80009a <l_buffer_element.1815>
  95e:	8f 5f       	subi	r24, 0xFF	; 255
- 960:	80 93 9a 00 	sts	0x009A, r24	; 0x80009a <l_buffer_element.1816>
+ 960:	80 93 9a 00 	sts	0x009A, r24	; 0x80009a <l_buffer_element.1815>
 					dispatcher_state							= SENDING ;													// state of dispatcher now is sending 
  964:	83 e0       	ldi	r24, 0x03	; 3
- 966:	80 93 99 00 	sts	0x0099, r24	; 0x800099 <dispatcher_state.1818>
+ 966:	80 93 99 00 	sts	0x0099, r24	; 0x800099 <dispatcher_state.1817>
  96a:	5e c0       	rjmp	.+188    	; 0xa28 <bcm_disbatcher+0x144>
 			
 				}
@@ -1342,10 +1307,10 @@ enu_bcm_send_state_t bcm_disbatcher(str_bcm_instance_t *ptr_bcm_instance_t ,enu_
  974:	10 92 9f 00 	sts	0x009F, r1	; 0x80009f <gl_uart_state>
 					dispatcher_state							= BUFFER_SENT_OK ;											// state of dispatcher now is BUFFER_SENT_OK 
  978:	8a e0       	ldi	r24, 0x0A	; 10
- 97a:	80 93 99 00 	sts	0x0099, r24	; 0x800099 <dispatcher_state.1818>
+ 97a:	80 93 99 00 	sts	0x0099, r24	; 0x800099 <dispatcher_state.1817>
 					l_buffer_Num++;																							// accessing next buffer to send
  97e:	9f 5f       	subi	r25, 0xFF	; 255
- 980:	90 93 9b 00 	sts	0x009B, r25	; 0x80009b <l_buffer_Num.1815>
+ 980:	90 93 9b 00 	sts	0x009B, r25	; 0x80009b <l_buffer_Num.1814>
 					
 					if (str_sending_buffer->ptr_data_buffer[l_buffer_Num] != NULL)											// checking if there is another buffer to send				
  984:	e9 2f       	mov	r30, r25
@@ -1362,18 +1327,18 @@ enu_bcm_send_state_t bcm_disbatcher(str_bcm_instance_t *ptr_bcm_instance_t ,enu_
  994:	81 e0       	ldi	r24, 0x01	; 1
  996:	80 93 9f 00 	sts	0x009F, r24	; 0x80009f <gl_uart_state>
 						l_buffer_element						= FIRST_ELEMENT;
- 99a:	10 92 9a 00 	sts	0x009A, r1	; 0x80009a <l_buffer_element.1816>
+ 99a:	10 92 9a 00 	sts	0x009A, r1	; 0x80009a <l_buffer_element.1815>
 						dispatcher_state						= IDLE ;
- 99e:	10 92 99 00 	sts	0x0099, r1	; 0x800099 <dispatcher_state.1818>
+ 99e:	10 92 99 00 	sts	0x0099, r1	; 0x800099 <dispatcher_state.1817>
  9a2:	42 c0       	rjmp	.+132    	; 0xa28 <bcm_disbatcher+0x144>
 					}
 					else{																									// if there is no other buffer
 						gl_uart_state								= READY ;
 						l_buffer_element						= FIRST_ELEMENT;
- 9a4:	10 92 9a 00 	sts	0x009A, r1	; 0x80009a <l_buffer_element.1816>
+ 9a4:	10 92 9a 00 	sts	0x009A, r1	; 0x80009a <l_buffer_element.1815>
 						l_first_use								= RECEVING_FIRST;											// activate receiving
  9a8:	82 e0       	ldi	r24, 0x02	; 2
- 9aa:	80 93 9c 00 	sts	0x009C, r24	; 0x80009c <l_first_use.1814>
+ 9aa:	80 93 9c 00 	sts	0x009C, r24	; 0x80009c <l_first_use.1813>
  9ae:	3c c0       	rjmp	.+120    	; 0xa28 <bcm_disbatcher+0x144>
 					}
 				}
@@ -1386,7 +1351,7 @@ enu_bcm_send_state_t bcm_disbatcher(str_bcm_instance_t *ptr_bcm_instance_t ,enu_
 		{
 			
 			uart_RX_SetCallBack(uart_isr_recieve_func);
- 9b4:	85 e2       	ldi	r24, 0x25	; 37
+ 9b4:	8d e1       	ldi	r24, 0x1D	; 29
  9b6:	95 e0       	ldi	r25, 0x05	; 5
  9b8:	0e 94 c5 03 	call	0x78a	; 0x78a <uart_RX_SetCallBack>
 			if (gl_uart_state2 == RX_DONE)																				// if there is data to read 
@@ -1396,7 +1361,7 @@ enu_bcm_send_state_t bcm_disbatcher(str_bcm_instance_t *ptr_bcm_instance_t ,enu_
 			{
 		
 				str_receving_buffer->ptr_dataBASE[l_rx_buffer_element] = uart_receive();                                // saving data in array
- 9c4:	c0 91 98 00 	lds	r28, 0x0098	; 0x800098 <l_rx_buffer_element.1817>
+ 9c4:	c0 91 98 00 	lds	r28, 0x0098	; 0x800098 <l_rx_buffer_element.1816>
  9c8:	d0 e0       	ldi	r29, 0x00	; 0
  9ca:	0e 94 c3 03 	call	0x786	; 0x786 <uart_receive>
  9ce:	c0 5e       	subi	r28, 0xE0	; 224
@@ -1404,7 +1369,7 @@ enu_bcm_send_state_t bcm_disbatcher(str_bcm_instance_t *ptr_bcm_instance_t ,enu_
  9d2:	88 83       	st	Y, r24
 				
 				if(str_receving_buffer->ptr_dataBASE[l_buffer_element] != NULL)
- 9d4:	e0 91 9a 00 	lds	r30, 0x009A	; 0x80009a <l_buffer_element.1816>
+ 9d4:	e0 91 9a 00 	lds	r30, 0x009A	; 0x80009a <l_buffer_element.1815>
  9d8:	f0 e0       	ldi	r31, 0x00	; 0
  9da:	e0 5e       	subi	r30, 0xE0	; 224
  9dc:	fc 4f       	sbci	r31, 0xFC	; 252
@@ -1413,7 +1378,7 @@ enu_bcm_send_state_t bcm_disbatcher(str_bcm_instance_t *ptr_bcm_instance_t ,enu_
  9e2:	11 f1       	breq	.+68     	; 0xa28 <bcm_disbatcher+0x144>
 				{	
 					if(str_receving_buffer->ptr_dataBASE[l_rx_buffer_element]  == '&')									// if we receive the acknowledge of sending is done 
- 9e4:	80 91 98 00 	lds	r24, 0x0098	; 0x800098 <l_rx_buffer_element.1817>
+ 9e4:	80 91 98 00 	lds	r24, 0x0098	; 0x800098 <l_rx_buffer_element.1816>
  9e8:	e8 2f       	mov	r30, r24
  9ea:	f0 e0       	ldi	r31, 0x00	; 0
  9ec:	e0 5e       	subi	r30, 0xE0	; 224
@@ -1423,15 +1388,15 @@ enu_bcm_send_state_t bcm_disbatcher(str_bcm_instance_t *ptr_bcm_instance_t ,enu_
  9f4:	69 f4       	brne	.+26     	; 0xa10 <bcm_disbatcher+0x12c>
 					{
 						l_rx_buffer_element							=FIRST_ELEMENT;
- 9f6:	10 92 98 00 	sts	0x0098, r1	; 0x800098 <l_rx_buffer_element.1817>
+ 9f6:	10 92 98 00 	sts	0x0098, r1	; 0x800098 <l_rx_buffer_element.1816>
 						l_first_use									= SENDING_FIRST;									// activate sending again
  9fa:	81 e0       	ldi	r24, 0x01	; 1
- 9fc:	80 93 9c 00 	sts	0x009C, r24	; 0x80009c <l_first_use.1814>
+ 9fc:	80 93 9c 00 	sts	0x009C, r24	; 0x80009c <l_first_use.1813>
 						gl_uart_state								= TX_DONE;
  a00:	80 93 9f 00 	sts	0x009F, r24	; 0x80009f <gl_uart_state>
 						dispatcher_state							= BUFFER_RECEIVED_OK;								// state of dispatcher now is BUFFER_RECEIVED_OK 
  a04:	8b e0       	ldi	r24, 0x0B	; 11
- a06:	80 93 99 00 	sts	0x0099, r24	; 0x800099 <dispatcher_state.1818>
+ a06:	80 93 99 00 	sts	0x0099, r24	; 0x800099 <dispatcher_state.1817>
 						gl_uart_state2								= READY;
  a0a:	10 92 9e 00 	sts	0x009E, r1	; 0x80009e <gl_uart_state2>
  a0e:	0c c0       	rjmp	.+24     	; 0xa28 <bcm_disbatcher+0x144>
@@ -1440,10 +1405,10 @@ enu_bcm_send_state_t bcm_disbatcher(str_bcm_instance_t *ptr_bcm_instance_t ,enu_
 					{	
 						dispatcher_state							= RECEVING;											// state of dispatcher now is BUFFER_RECEIVED_OK
  a10:	94 e0       	ldi	r25, 0x04	; 4
- a12:	90 93 99 00 	sts	0x0099, r25	; 0x800099 <dispatcher_state.1818>
+ a12:	90 93 99 00 	sts	0x0099, r25	; 0x800099 <dispatcher_state.1817>
 						l_rx_buffer_element++;
  a16:	8f 5f       	subi	r24, 0xFF	; 255
- a18:	80 93 98 00 	sts	0x0098, r24	; 0x800098 <l_rx_buffer_element.1817>
+ a18:	80 93 98 00 	sts	0x0098, r24	; 0x800098 <l_rx_buffer_element.1816>
 						gl_uart_state2								= READY;
  a1c:	10 92 9e 00 	sts	0x009E, r1	; 0x80009e <gl_uart_state2>
  a20:	03 c0       	rjmp	.+6      	; 0xa28 <bcm_disbatcher+0x144>
@@ -1454,40 +1419,40 @@ enu_bcm_send_state_t bcm_disbatcher(str_bcm_instance_t *ptr_bcm_instance_t ,enu_
 
 			dispatcher_state									 = INVALID_STATE;
  a22:	81 e0       	ldi	r24, 0x01	; 1
- a24:	80 93 99 00 	sts	0x0099, r24	; 0x800099 <dispatcher_state.1818>
+ a24:	80 93 99 00 	sts	0x0099, r24	; 0x800099 <dispatcher_state.1817>
 		}
 		
 	}
 	return dispatcher_state ;
- a28:	80 91 99 00 	lds	r24, 0x0099	; 0x800099 <dispatcher_state.1818>
+ a28:	80 91 99 00 	lds	r24, 0x0099	; 0x800099 <dispatcher_state.1817>
  a2c:	df 91       	pop	r29
  a2e:	cf 91       	pop	r28
  a30:	08 95       	ret
 
 00000a32 <uart_isr_send_func>:
- a32:	60 e0       	ldi	r22, 0x00	; 0
- a34:	81 e1       	ldi	r24, 0x11	; 17
- a36:	0e 94 95 00 	call	0x12a	; 0x12a <DIO_INITPIN>
- a3a:	61 e0       	ldi	r22, 0x01	; 1
- a3c:	81 e1       	ldi	r24, 0x11	; 17
- a3e:	0e 94 97 01 	call	0x32e	; 0x32e <DIO_WRITEPIN>
- a42:	81 e0       	ldi	r24, 0x01	; 1
- a44:	80 93 9f 00 	sts	0x009F, r24	; 0x80009f <gl_uart_state>
- a48:	08 95       	ret
 
-00000a4a <uart_isr_recieve_func>:
- a4a:	60 e0       	ldi	r22, 0x00	; 0
- a4c:	85 e1       	ldi	r24, 0x15	; 21
- a4e:	0e 94 95 00 	call	0x12a	; 0x12a <DIO_INITPIN>
- a52:	61 e0       	ldi	r22, 0x01	; 1
- a54:	85 e1       	ldi	r24, 0x15	; 21
- a56:	0e 94 97 01 	call	0x32e	; 0x32e <DIO_WRITEPIN>
- a5a:	82 e0       	ldi	r24, 0x02	; 2
- a5c:	80 93 9e 00 	sts	0x009E, r24	; 0x80009e <gl_uart_state2>
- a60:	08 95       	ret
+//--------------------------- UART INTERRUPT HANDLING -------------------- //
 
-00000a62 <_exit>:
- a62:	f8 94       	cli
+void uart_isr_send_func (void){
 
-00000a64 <__stop_program>:
- a64:	ff cf       	rjmp	.-2      	; 0xa64 <__stop_program>
+	gl_uart_state = TX_DONE ;
+ a32:	81 e0       	ldi	r24, 0x01	; 1
+ a34:	80 93 9f 00 	sts	0x009F, r24	; 0x80009f <gl_uart_state>
+ a38:	08 95       	ret
+
+00000a3a <uart_isr_recieve_func>:
+}
+
+void uart_isr_recieve_func (void){
+	
+
+	gl_uart_state2 = RX_DONE ;
+ a3a:	82 e0       	ldi	r24, 0x02	; 2
+ a3c:	80 93 9e 00 	sts	0x009E, r24	; 0x80009e <gl_uart_state2>
+ a40:	08 95       	ret
+
+00000a42 <_exit>:
+ a42:	f8 94       	cli
+
+00000a44 <__stop_program>:
+ a44:	ff cf       	rjmp	.-2      	; 0xa44 <__stop_program>

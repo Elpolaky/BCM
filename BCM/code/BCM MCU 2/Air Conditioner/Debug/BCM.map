@@ -992,30 +992,30 @@ END GROUP
  .debug_frame   0x00000684       0x88 SERVICE/bcm/bcm.o
  .debug_frame   0x0000070c       0x34 SERVICE/bcm/bcm_config.o
 
-.debug_str      0x00000000     0x1394
+.debug_str      0x00000000     0x13fc
  *(.debug_str)
  .debug_str     0x00000000      0x196 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega32/avr5/crtatmega32.o
- .debug_str     0x00000196      0x3c8 APP/APP.o
-                                0x417 (size before relaxing)
- .debug_str     0x0000055e      0x116 HAL/led/LED.o
+ .debug_str     0x00000196      0x3c5 APP/APP.o
+                                0x414 (size before relaxing)
+ .debug_str     0x0000055b      0x116 HAL/led/LED.o
                                 0x2e9 (size before relaxing)
- .debug_str     0x00000674       0x11 main.o
+ .debug_str     0x00000671       0x7c main.o
                                 0x1bd (size before relaxing)
- .debug_str     0x00000685      0x12c MCAL/dio/DIO.o
+ .debug_str     0x000006ed      0x12c MCAL/dio/DIO.o
                                 0x355 (size before relaxing)
- .debug_str     0x000007b1      0x134 MCAL/exi_interrupt/EXI_INTERRUPT.o
+ .debug_str     0x00000819      0x134 MCAL/exi_interrupt/EXI_INTERRUPT.o
                                 0x291 (size before relaxing)
- .debug_str     0x000008e5      0x147 MCAL/spi/spi.o
+ .debug_str     0x0000094d      0x147 MCAL/spi/spi.o
                                 0x3b1 (size before relaxing)
- .debug_str     0x00000a2c      0x28c MCAL/timers/timer.o
+ .debug_str     0x00000a94      0x28c MCAL/timers/timer.o
                                 0x402 (size before relaxing)
- .debug_str     0x00000cb8      0x422 MCAL/usart/uart.o
+ .debug_str     0x00000d20      0x422 MCAL/usart/uart.o
                                 0x5be (size before relaxing)
- .debug_str     0x000010da       0x1c MCAL/usart/uart_config.o
+ .debug_str     0x00001142       0x1c MCAL/usart/uart_config.o
                                 0x39f (size before relaxing)
- .debug_str     0x000010f6      0x259 SERVICE/bcm/bcm.o
+ .debug_str     0x0000115e      0x259 SERVICE/bcm/bcm.o
                                 0x569 (size before relaxing)
- .debug_str     0x0000134f       0x45 SERVICE/bcm/bcm_config.o
+ .debug_str     0x000013b7       0x45 SERVICE/bcm/bcm_config.o
                                 0x262 (size before relaxing)
 
 .debug_loc      0x00000000     0x1ec5
